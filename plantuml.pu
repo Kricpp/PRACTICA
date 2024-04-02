@@ -1,0 +1,85 @@
+@startuml 'zoologico'
+class models.Animal{
+    nombre:string
+    especie_id:integer
+    recinto_id:integer
+    cuidador_id:integer
+    fecha_nacimiento:date
+    genero:string
+    peso:float
+}
+class models.Especie{
+    nombre:string
+    descripcion:string
+}
+class models.Recinto{
+    nombre:string
+    capacidad:integer
+    clima:string
+}
+class models.Cuidador{
+    nombre:string
+    salario:float
+}
+
+class models.Actividad{
+    nombre:string
+    descripcion:string
+    dia:string
+    horario:string
+}
+
+class models.ActividadAnimal{
+    actividad_id:integer
+    animal_id:integer
+}
+
+class models.AnimalCuidador{
+    cuidador_id:integer
+    animal_id:integer
+}
+
+class controllers.Animal{
+    resource()
+}
+class controllers.Especie{
+    resource()
+}
+class controllers.Recinto{
+    resource()
+}
+class controllers.Cuidador{
+    resource()
+}
+class controllers.Actividad{
+    resource()
+}
+
+class models.CuidadorEspecie{
+    cuidador_id:integer
+    especie_id:interger
+}
+class models.AnimalRecinto{
+    animal_id:integer
+    recinto_id:interger
+}
+
+class models.EspecieRecinto{
+    especie_id:integer
+    recinto_id:interger
+}
+
+models.Animal"1"*-- "*" models.AnimalCuidador
+models.Cuidador"1"*-- "*" models.AnimalCuidador
+models.Especie"1"*--"*" models.Animal
+models.Especie"*"--*"1" models.EspecieRecinto
+models.Recinto"*"--*"1" models.EspecieRecinto
+models.Especie"1"*--"*" models.CuidadorEspecie
+models.Cuidador"1"*--"*" models.CuidadorEspecie
+models.Animal"1"*--"*" models.AnimalRecinto
+models.Recinto"1"*--"*" models.AnimalRecinto
+
+models.Animal"1"*--"*" models.ActividadAnimal
+
+models.Actividad"1"*--"*" models.ActividadAnimal
+@enduml
